@@ -6,16 +6,16 @@ import java.text.SimpleDateFormat
 
 //get
 log.info("=======================test started for get=======================")
-def f=new File("C://Mayur//SoapUI//sample.xls");   ///97-2013 workbook xls
-def wk= Workbook.getWorkbook(f)
-def ws=wk.getSheet("Sheet1")
-r=ws.getRows()	//max row number
+def f_g=new File("C://Mayur//SoapUI//sample.xls");   ///97-2013 workbook xls
+def wk_g= Workbook.getWorkbook(f_g)
+def ws_g=wk_g.getSheet("Sheet1")
+r_g=ws_g.getRows()	//max row number
 
 
-for(def i=1;i&lt;r;i++)
+for(def i=1;i&lt;r_g;i++)
 {
-    log.info "last row number - "+r
-    Cell c1=ws.getCell(0,i)
+    log.info "last row number - "+r_g
+    Cell c1=ws_g.getCell(0,i)
     log.info c1.getContents()
     
     def get = new URL("http://thetestingworldapi.com/api/technicalskills/"+c1.getContents()).openConnection();
@@ -32,20 +32,20 @@ for(def i=1;i&lt;r;i++)
 
 log.info("=======================test started for Post=======================")
 
-def f=new File("C://Mayur//SoapUI//post_sample.xls");   ///97-2013 workbook xls
-def wk= Workbook.getWorkbook(f)
-def ws=wk.getSheet("Sheet1")
-r=ws.getRows()	//max row number
+def f_p=new File("C://Mayur//SoapUI//post_sample.xls");   ///97-2013 workbook xls
+def wk_p= Workbook.getWorkbook(f_p)
+def ws_p=wk_p.getSheet("Sheet1")
+r_p=ws_p.getRows()	//max row number
 
 
-for(def i=1;i&lt;r;i++)
+for(def i=1;i&lt;r_p;i++)
 {
-    log.info "last row number - "+r
-    Cell id=ws.getCell(0,i)
-    Cell language=ws.getCell(1,i)
-    Cell yearexp=ws.getCell(2,i)
-    Cell lastused=ws.getCell(3,i)
-    Cell st_id=ws.getCell(4,i)
+    log.info "last row number - "+r_p
+    Cell id=ws_p.getCell(0,i)
+    Cell language=ws_p.getCell(1,i)
+    Cell yearexp=ws_p.getCell(2,i)
+    Cell lastused=ws_p.getCell(3,i)
+    Cell st_id=ws_p.getCell(4,i)
 
     
 
