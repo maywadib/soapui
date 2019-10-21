@@ -1,2 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="54fc6423-29e6-4d9a-a0c5-47c934e0be8b" activeEnvironment="Default" name="REST Project 1" resourceRoot="" soapui-version="5.5.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:testSuite id="4e78b3fa-3729-44a3-ad56-60a699f3c0a1" name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="e85a40c5-291f-471d-909f-c2c12ed7ada1" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
+<con:soapui-project id="677cc66d-3086-4190-ba24-e3d5a9a6fa98" activeEnvironment="Default" name="SampleProject" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:testSuite id="a6a6856c-6f2a-4821-9c7d-90e0a46011cc" name="SampleTestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="707cbb2c-f3d9-4b49-8837-6ff953605e12" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="SampleTestCase" searchProperties="true"><con:settings/><con:testStep type="groovy" name="SampleGroovyStep" id="2cd339e0-1557-4d7f-a7da-42911ca87916"><con:settings/><con:config><script>import java.io.* 
+import jxl.* 
+import jxl.write.* 
+import java.text.SimpleDateFormat  
+//get 
+log.info("=======================test started for get=======================") 
+
+def f_g=new File("C://Mayur//SoapUI//sample.xls");   ///97-2013 workbook xls 
+def wk_g= Workbook.getWorkbook(f_g) 
+def ws_g=wk_g.getSheet("Sheet1") 
+r_g=ws_g.getRows()	//max row number   
+
+for(def i=1;i&lt;r_g;i++) 
+{     
+	log.info "last row number - "+r_g     
+	Cell c1=ws_g.getCell(0,i)     
+	log.info c1.getContents()          
+	def get = new URL("http://thetestingworldapi.com/api/technicalskills/"+c1.getContents()).openConnection();     
+	def getRC = get.getResponseCode();     
+	log.info("code is - "+getRC);     
+	if(getRC.equals(200)) {       
+		log.info(get.getInputStream().getText());     
+	}  
+}  
+//==========================================================================================================// 
+// POST  
+
+log.info("=======================test started for Post=======================")  
+def f_p=new File("C://Mayur//SoapUI//post_sample.xls");   ///97-2013 workbook xls 
+def wk_p= Workbook.getWorkbook(f_p) 
+def ws_p=wk_p.getSheet("Sheet1") 
+r_p=ws_p.getRows()	//max row number   
+
+for(def i=1;i&lt;r_p;i++) {     
+	log.info "last row number - "+r_p     
+	Cell id=ws_p.getCell(0,i)     
+	Cell language=ws_p.getCell(1,i)     
+	Cell yearexp=ws_p.getCell(2,i)     
+	Cell lastused=ws_p.getCell(3,i)     
+	Cell st_id=ws_p.getCell(4,i)         	
+	
+	def post = new URL("http://thetestingworldapi.com/api/technicalskills").openConnection(); 	
+	def params = '{"id": '+id.getContents()+', "language": ["'+language.getContents().split(",")[0]+'","'+language.getContents().split(",")[1]+'"],"yearexp": "'+yearexp.getContents()+'","lastused": "'+lastused.getContents()+'","st_id": "'+st_id.getContents()+'"}' 	
+	
+	post.setRequestMethod("POST") 	
+	post.setDoOutput(true) 	
+	post.setRequestProperty("Content-Type", "application/json") 	
+	post.getOutputStream().write(params.getBytes("UTF-8"));  	 	
+	def postRC = post.getResponseCode(); 	
+	log.info(postRC); 	
+	if(postRC.equals(200)) { 	    
+		log.info(post.getInputStream().getText()); 	
+	}  
+}   
+log.info("=======================test ended=======================")</script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
