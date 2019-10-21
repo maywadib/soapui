@@ -6,7 +6,8 @@ node {
        
 
        stage('Docker Deploy') {
-			bat 'C:/Program^ Files/SmartBear/SoapUI-5.5.0/bin/testrunner.bat -sSampleTestSuite -r -j C:/Mayur/SoapUI/projects/SampleProject.xml'
+			bat 'C:/Program^ Files/SmartBear/SoapUI-5.5.0/bin/testrunner.bat -sSampleTestSuite -r -j SampleProject.xml'
+			//C:/Mayur/SoapUI/projects/SampleProject.xml
 			echo '****************DOCKER DEPLOY SUCCESSFUL****************'
         }
 
